@@ -8,8 +8,8 @@ if [[ $# -ne 2 ]]; then
   exit 1
 fi
 
-API_TOKEN="$1"
-DEVICE_ID="$2"
+DEVICE_ID="$1"
+API_TOKEN="$2"
 
 # 1) Get public IP
 CURRENT_IP=$(curl -s https://api.ipify.org)
