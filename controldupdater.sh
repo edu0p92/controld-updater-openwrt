@@ -38,7 +38,7 @@ echo "My current public IP:      $CURRENT_IP"
 
 # 4) If it hasn’t changed, exit
 if [[ "$CURRENT_IP" == "$OLD_IP" ]]; then
-  echo "✅ IP hasn’t changed. Nothing to do."
+  echo "IP hasn’t changed. Nothing to do."
   exit 0
 fi
 
@@ -60,7 +60,7 @@ if [[ ! "$code_del" =~ ^2 ]]; then
   exit 1
 fi
 
-echo "🗑️  Old IP $OLD_IP deleted."
+echo "Old IP $OLD_IP deleted."
 
 # 6) Add the new IP
 resp_add=$(curl -sS -w "\n%{http_code}" --request POST \
@@ -75,10 +75,10 @@ body_add=$(echo "$resp_add" | sed '$d')
 code_add=$(echo "$resp_add" | tail -n1)
 
 if [[ "$code_add" =~ ^2 ]]; then
-  echo "✅ New IP $CURRENT_IP authorized successfully."
+  echo "New IP $CURRENT_IP authorized successfully."
   echo "$body_add" | jq .
 else
-  echo "❌ Error $code_add authorizing new IP $CURRENT_IP"
+  echo "Error $code_add authorizing new IP $CURRENT_IP"
   echo "$body_add" | jq . || echo "$body_add"
   exit 1
 fi
